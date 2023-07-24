@@ -42,7 +42,7 @@ export function statement(invoice, plays) {
     .format(aNumber / 100);
   }
   
-  function totalVolumeCredits(){
+  const totalVolumeCredits = () => {
     let result= 0;
     for(let perf of invoice.performances) {
       result+= volumeCreditsFor(perf)
@@ -50,7 +50,7 @@ export function statement(invoice, plays) {
     return result;
   }
   
-  function totalAmount(){
+  const totalAmount = () => {
     let result = 0;
     for (let perf of invoice.performances) {
       result += amountFor(perf);
