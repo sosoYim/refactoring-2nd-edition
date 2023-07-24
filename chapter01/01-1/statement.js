@@ -55,6 +55,7 @@ export function statement(invoice, plays) {
     for (let perf of invoice.performances) {
       result += amountFor(perf);
     }
+    return result;
   }
 
   let result = `청구내역 (고객명: ${invoice.customer})\n`;
