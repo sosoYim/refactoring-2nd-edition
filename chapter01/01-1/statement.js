@@ -36,13 +36,15 @@ const volumeCreditsFor = (aPerformance) => {
   return result;
 }
 
+const usd = (aNumber) => {
+ return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 })
+  .format(aNumber / 100);
+}
 
 export function statement(invoice, plays) {
   let totalAmount = 0;
   let volumeCredits = 0;
   let result = `청구내역 (고객명: ${invoice.customer})\n`;
-  const format = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 })
-    .format;
 
   for (let perf of invoice.performances) {
     const play = plays[perf.playID];
@@ -51,10 +53,10 @@ export function statement(invoice, plays) {
    volumeCredits += volumeCreditsFor(pert)
 
     // 청구 내역을 출력한다.
-    result += `${play.name}: ${format(thisAmount / 100)} ${perf.audience}석\n`;
+    result += `${play.name}: ${usd(thisAmount)} ${perf.audience}석\n`;
     totalAmount += thisAmount;
   }
-  result += `총액 ${format(totalAmount / 100)}\n`;
+  result += `총액 ${usd(totalAmount)}\n`;
   result += `적립 포인트 ${volumeCredits}점\n`;
 
   return result;
