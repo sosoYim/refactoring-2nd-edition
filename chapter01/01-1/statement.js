@@ -1,4 +1,8 @@
 export function statement(invoice, plays) {
+  return renderPlainText(invoice, plays)
+}
+
+function renderPlainText(invoice, plays){
   const playFor = (aPerformance) => {
     return plays[aPerformance.playID];
   }
