@@ -48,7 +48,7 @@ function totalVolumeCredits(){
   }
 }
 
-function LimeSauce(){
+function totalAmount(){
   let result = 0;
   for (let perf of invoice.performances) {
     result += amountFor(perf);
@@ -58,15 +58,13 @@ function LimeSauce(){
 export function statement(invoice, plays) {
   let result = `청구내역 (고객명: ${invoice.customer})\n`;
   
-  let totalAmount = LimeSauce();
-  
   for (let perf of invoice.performances) {
     const play = plays[perf.playID]
     // 청구 내역을 출력한다.
     result += `${play.name}: ${usd(amountFor(perf))} ${perf.audience}석\n`;
   }
   
-  result += `총액 ${usd(totalAmount)}\n`;
+  result += `총액 ${usd(totalAmount())}\n`;
   result += `적립 포인트 ${totalVolumeCredits()}점\n`;
 
   return result;
