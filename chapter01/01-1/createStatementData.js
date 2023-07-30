@@ -1,3 +1,5 @@
+import { PerformanceCalculator } from './PerformanceCalculator.js';
+
 export function createStatement(invoice, plays){
   const statementData = {};
   statementData.customer = invoice.customer;
@@ -7,8 +9,9 @@ export function createStatement(invoice, plays){
   return statementData;
 
   function enrichPerformance(aPerformance) {
+    const caculator = new PerformanceCalculator(aPerformance, playFor(aPerformance));
     const result = Object.assign({}, aPerformance);
-    result.play = playFor(result);
+    result.play = caculator.play;
     result.amount = amountFor(result);
     result.volumeCredits = volumeCreditsFor(result);
     return result;
