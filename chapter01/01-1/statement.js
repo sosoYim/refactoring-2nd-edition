@@ -39,12 +39,6 @@ export function statement(invoice, plays) {
 
 
 function renderPlainText(data){  
-  const usd = (aNumber) => {
-   return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 })
-    .format(aNumber / 100);
-  }
-  
-
   let result = `청구내역 (고객명: ${data.customer})\n`;
   
   for (let perf of data.performances) {
@@ -57,3 +51,8 @@ function renderPlainText(data){
 
   return result;
 }
+
+function usd(aNumber) {
+  return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 })
+   .format(aNumber / 100);
+ }
