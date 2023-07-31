@@ -1,17 +1,16 @@
-import { Province, sampleProvinceData } from './index.js';
-import assert from 'assert';
+import { Province, sampleProvinceData } from "./index.js";
 
-describe('province', function () {
+describe("province", function () {
   let asia;
   beforeEach(function () {
     asia = new Province(sampleProvinceData());
   });
 
-  it('shortfall', function () {
-    assert.equal(asia.shortfall, 5);
+  it("shortfall", function () {
+    expect(asia.shortfall).toEqual(5);
   });
 
-  it('profit', function () {
-    assert.equal(asia.profit, 230);
+  it("profit", function () {
+    expect(asia.profit).toEqual(230);
   });
 });
