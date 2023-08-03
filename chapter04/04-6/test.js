@@ -1,4 +1,4 @@
-import { Province, sampleProvinceData } from "./index.js";
+import { NoArrayError, Province, sampleProvinceData } from "./index.js";
 
 describe("province", function () {
   let asia;
@@ -28,8 +28,9 @@ describe("province", function () {
   });
 
   it("negative demand", function () {
+    // 음수는 허용하지 않으므로 0으로 간주한다.
     asia.demand = -1;
-    expect(asia.shortfall).toEqual(-26);
+    expect(asia.shortfall).toEqual(-25);
     expect(asia.profit).toEqual(0);
   });
 
@@ -68,7 +69,11 @@ describe("string for producers", function () {
       demand: 30,
       price: 20,
     };
-    const prov = new Province(data);
-    expect(prov.shortfall).toEqual(0);
+
+    try {
+      new Province(data);
+    } catch (e) {
+      expect(e).toBeInstanceOf(NoArrayError);
+    }
   });
 });

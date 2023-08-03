@@ -1,5 +1,9 @@
+export class NoArrayError extends Error {}
+
 export class Province {
   constructor(doc) {
+    // producers 가 배열이 아니면 에러를 발생시킨다.
+    if (!Array.isArray(doc.producers)) throw new NoArrayError();
     this._name = doc.name;
     this._producers = [];
     this._totalProduction = 0;
@@ -29,7 +33,8 @@ export class Province {
     return this._demand;
   }
   set demand(arg) {
-    this._demand = parseInt(arg);
+    // 요청은 항상 0 이상이어야 한다. (음수는 허용하지 않는다.)
+    this._demand = parseInt(arg) < 0 ? 0 : parseInt(arg);
   }
   get price() {
     return this._price;
@@ -93,11 +98,11 @@ class Producer {
 
 export function sampleProvinceData() {
   return {
-    name: 'Asia',
+    name: "Asia",
     producers: [
-      { name: 'Byzantium', cost: 10, production: 9 },
-      { name: 'Attalia', cost: 12, production: 10 },
-      { name: 'Sinope', cost: 10, production: 6 },
+      { name: "Byzantium", cost: 10, production: 9 },
+      { name: "Attalia", cost: 12, production: 10 },
+      { name: "Sinope", cost: 10, production: 6 },
     ],
     demand: 30,
     price: 20,
